@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.treinarecife.br.projeto.projeto.model.Projeto;
 import com.treinarecife.br.projeto.projeto.model.dto.ProjetoCreateRequest;
 import com.treinarecife.br.projeto.projeto.model.dto.ProjetoUpdateRequest;
-import com.treinarecife.br.projeto.projeto.respository.ProjetoRepository;
+import com.treinarecife.br.projeto.projeto.repository.ProjetoRepository;
 import com.treinarecife.br.projeto.usuarios.model.Usuario;
 import com.treinarecife.br.projeto.usuarios.service.UsuarioService;
 

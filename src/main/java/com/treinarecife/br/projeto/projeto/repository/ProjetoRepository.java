@@ -1,4 +1,4 @@
-package com.treinarecife.br.projeto.projeto.respository;
+package com.treinarecife.br.projeto.projeto.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
