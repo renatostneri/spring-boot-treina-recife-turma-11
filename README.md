@@ -1,21 +1,22 @@
 # Spring Boot - Treina Recife Turma 11
 
-Bem-vindo ao módulo de Spring Boot da Treina Recife! Este projeto é uma aplicação de exemplo para aprender os conceitos fundamentais do framework Spring Boot.
+Bem-vindo ao módulo de Spring Boot da Treina Recife. Este projeto é uma API REST de exemplo para gerenciamento de usuários e projetos, construída com Spring Boot.
 
 ## 📋 Descrição do Projeto
 
-Aplicação Spring Boot com API REST para gerenciamento de usuários, utilizando:
+Aplicação Spring Boot com API REST para gerenciamento de usuários e projetos, utilizando:
 - **Spring Boot 4.0.6**
 - **Spring Data JPA** para persistência de dados
 - **MySQL** como banco de dados
 - **Flyway** para versionamento de banco de dados
+- **SpringDoc OpenAPI** para documentação da API
 - **Lombok** para redução de boilerplate de código
 
 ## 🛠️ Pré-requisitos
 
 Antes de começar, certifique-se de ter instalado em sua máquina:
 
-- **Java 17** ou superior
+- **Java 21** ou superior
 - **Maven 3.6+**
 - **MySQL 8.0** ou superior
 - **Git**
@@ -88,7 +89,7 @@ EXIT;
 
 ### 3. Configurar as Credenciais do Banco de Dados
 
-O arquivo de configuração da aplicação está em `src/main/resources/application.yaml`
+O arquivo de configuração da aplicação está em `src/main/resources/application.yaml`.
 
 Abra o arquivo e atualize as credenciais conforme necessário:
 
@@ -98,8 +99,8 @@ spring:
     name: projeto
   datasource:
     url: jdbc:mysql://localhost/sgp2
-    username: root          # ← Coloque seu usuário do MySQL
-    password: admin         # ← Coloque sua senha do MySQL
+    username: root
+    password: admin
   jpa:
     show-sql: true
     properties:
@@ -109,9 +110,9 @@ spring:
 ```
 
 **⚠️ Importante:**
-- `username`: Digite o usuário do seu MySQL (geralmente é `root`)
-- `password`: Digite a senha que você definiu na instalação do MySQL
-- Não altere a `url` (jdbc:mysql://localhost/sgp2)
+- `username`: digite o usuário do seu MySQL, geralmente `root`
+- `password`: digite a senha definida na instalação do MySQL
+- não altere a `url` (`jdbc:mysql://localhost/sgp2`)
 
 ### 4. Compilar e Executar a Aplicação
 
@@ -122,10 +123,10 @@ mvn clean install
 ```
 
 Esse comando irá:
-- Limpar o diretório `target`
-- Baixar as dependências
-- Compilar o código
-- Rodar os testes
+- limpar o diretório `target`
+- baixar as dependências
+- compilar o código
+- rodar os testes
 
 #### 4.2 Executar a Aplicação
 
@@ -133,52 +134,64 @@ Esse comando irá:
 mvn spring-boot:run
 ```
 
-Ou através da IDE (clique com botão direito em `ProjetoApplication.java` → Run).
+Ou através da IDE, executando `ProjetoApplication.java`.
 
-A aplicação estará disponível em: `http://localhost:8080`
+A aplicação estará disponível em:
+- `http://localhost:8080`
+- `http://localhost:8080/swagger-ui/index.html`
 
-## � Modelagem do Banco de Dados (MER)
+## 🗺️ Modelagem do Banco de Dados (MER)
 
 Modelo Entidade Relacionamento da aplicação:
 
 ![Diagrama MER](documentacao/MER.jpg)
 
-**⚠️ Projeto em Construção:**
-O projeto está em desenvolvimento. Por enquanto, apenas o módulo de **Usuários** foi implementado. As classes referentes às entidades **Projeto** e **Tarefa** estão em desenvolvimento e serão adicionadas em breve.
-
-Entidades planejadas:
-- ✅ **Usuario** - Implementada
-- 🚧 **Projeto** - Em desenvolvimento
-- 🚧 **Tarefa** - Em desenvolvimento
-
-## �📁 Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
 src/main/java/com/treinarecife/br/projeto/
-├── ProjetoApplication.java           # Classe principal da aplicação
-└── usuarios/                          # Módulo de Usuários
+├── ProjetoApplication.java
+├── projeto/
+│   ├── controller/
+│   │   └── api/
+│   │       └── ProjetoController.java
+│   ├── model/
+│   │   ├── Projeto.java
+│   │   ├── dto/
+│   │   │   ├── ProjetoCreateRequest.java
+│   │   │   ├── ProjetoResponse.java
+│   │   │   └── ProjetoUpdateRequest.java
+│   │   └── enums/
+│   │       └── StatusProjeto.java
+│   ├── repository/
+│   │   └── ProjetoRepository.java
+│   └── service/
+│       └── ProjetoService.java
+└── usuarios/
     ├── controller/
     │   └── api/
-    │       └── UsuarioController.java # Endpoints da API
+    │       └── UsuarioController.java
     ├── model/
-    │   ├── Usuario.java               # Entidade de Usuário
-    │   ├── dto/                       # Data Transfer Objects
-    │   │   ├── UsuarioCreateDTO.java
-    │   │   ├── UsuarioReadDTO.java
-    │   │   └── UsuarioUpdateDTO.java
+    │   ├── Usuario.java
+    │   ├── dto/
+    │   │   ├── UsuarioCreateRequest.java
+    │   │   ├── UsuarioResponse.java
+    │   │   └── UsuarioUpdateRequest.java
     │   └── enums/
     │       └── StatusUsuario.java
-    ├── service/
-    │   └── UsuarioService.java        # Lógica de negócio
-    └── UsuarioRepository.java         # Acesso ao banco de dados
+    ├── repository/
+    │   └── UsuarioRepository.java
+    └── service/
+        └── UsuarioService.java
 
 src/main/resources/
-├── application.yaml                  # Configurações da aplicação
+├── application.yaml
 └── db/migration/
-    └── V1__create_table_usuarios.sql # Scripts do Flyway
+    ├── V1__create_table_usuarios.sql
+    └── V2__create_table_projeto.sql
 
-src/test/java/
-└── ProjetoApplicationTests.java      # Testes da aplicação
+src/test/java/com/treinarecife/br/projeto/
+└── ProjetoApplicationTests.java
 ```
 
 ## 🧪 Executar Testes
@@ -215,7 +228,7 @@ EXIT;
 ### Erro ao compilar: "Unsupported class-file format"
 
 **Solução:**
-- Verifique se você tem Java 17+ instalado: `java -version`
+- Verifique se você tem Java 21+ instalado: `java -version`
 - Configure a versão do Java na IDE
 
 ## 📚 Recursos Úteis
@@ -224,7 +237,8 @@ EXIT;
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 - [MySQL Documentation](https://dev.mysql.com/doc/)
 - [Flyway Documentation](https://flywaydb.org/documentation/)
-- [Lombok Project](https://projectlombok.org/
+- [SpringDoc OpenAPI](https://springdoc.org/)
+- [Lombok Project](https://projectlombok.org/)
 
 ## 📝 Notas Importantes
 
@@ -239,7 +253,7 @@ EXIT;
 3. Atualize as credenciais no `application.yaml`
 4. Execute `mvn clean install`
 5. Execute `mvn spring-boot:run`
-6. Acesse a API em `http://localhost:8080`
+6. Acesse a API em `http://localhost:8080` ou o Swagger em `http://localhost:8080/swagger-ui/index.html`
 
 ---
 
