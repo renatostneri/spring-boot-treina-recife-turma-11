@@ -2,7 +2,7 @@ spring:
   application:
     name: projeto
   datasource:
-    url: jdbc:mysql://localhost/sgp2
+    url: jdbc:mysql://localhost/treinaSpring2
     username: root
     password: root
   jpa:
@@ -11,3 +11,8 @@ spring:
       hibernate:
         format_sql: true
         ddl-auto: validate
+
+# Adicione estas linhas na raiz do arquivo:
+logging:
+  level:
+    org.hibernate.orm.jdbc.bind: TRACE
