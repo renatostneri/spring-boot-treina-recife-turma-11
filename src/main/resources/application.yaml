@@ -16,3 +16,8 @@ spring:
 logging:
   level:
     org.hibernate.orm.jdbc.bind: TRACE
+
+api:
+  security:
+    token:
+      secret: 12345

@@ -30,11 +30,13 @@ public class Usuario implements Serializable, UserDetails {
     private String login;
     private String senha;
     private String permissao;
+    private String email;
 
     public Usuario(UsuarioResquest usuarioDTO, String senhaCodificada) {
         this.login = usuarioDTO.login();
         this.senha = senhaCodificada;
         this.permissao = usuarioDTO.permissao();
+        this.email = usuarioDTO.email();
     }
 
     public UsuarioResponse toDTO() {

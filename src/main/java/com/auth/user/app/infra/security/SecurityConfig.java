@@ -42,9 +42,9 @@ public class SecurityConfig {
 
                 // 3. Regras de Autorização de Rotas
                 .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
+                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         // Permite que qualquer pessoa acesse o POST de usuários (para poder se cadastrar no sistema)
-                        .requestMatchers(HttpMethod.POST, "/usuarios/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll()
                         // Qualquer outra requisição no sistema EXIGE que o usuário esteja autenticado
 //                        .requestMatchers(HttpMethod.GET, "/usuarios/**").permitAll()
 
