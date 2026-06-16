@@ -273,7 +273,7 @@ Em `src/main/resources/db/migration/`:
 - Controle de acesso granular por método via `@PreAuthorize` nos controllers.
 - Senhas armazenadas com **BCrypt**.
 
-### Perfis (roles)
+
 
 Os usuários são criados com role `ROLE_USER` ou `ROLE_ADMIN`. Como o Spring adiciona o
 prefixo `ROLE_`, as anotações usam `hasRole('USER')` / `hasRole('ADMIN')`.
